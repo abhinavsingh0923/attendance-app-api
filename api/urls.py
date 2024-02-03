@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('faces/', faces.as_view(), name='faces'),
-    path('match_face/<int:batch_id>/<int:branch_id>/', match_face.as_view(), name='match_face'),
+    # path('match_face/<int:batch_id>/<int:branch_id>/', match_face.as_view(), name='match_face'),
     path('students/<int:branch_id>/<int:batch_id>/', StudentList.as_view(), name='student-list'),
     path('attendance/<int:lecture_id>/', AttendanceAPIView.as_view(), name='attendance'),
     path('batches/', AllBatches.as_view(), name='all_batches'),
