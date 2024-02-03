@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-)e&%b1=b5i3!_^%pl_t85*@$_k8fv_9dc3-mm*6!rig!)uf7()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['attendance-app-22ye.onrender.com','127.0.0.1','localhost']
 AUTH_USER_MODEL = 'account.User'
 # Application definition
 
