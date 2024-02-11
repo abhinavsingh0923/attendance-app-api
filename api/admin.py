@@ -35,3 +35,10 @@ class AttendanceAdmin(admin.ModelAdmin):
     list_filter = ['lecture', 'is_present']
     search_fields = ['student__name', 'lecture__course__name']
 
+@admin.register(TeacherProfile)
+class TeacherProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'get_courses']
+
+    def get_courses(self, obj):
+        return ", ".join([course.name for course in obj.courses.all()])
+    get_courses.short_description = 'Courses'
