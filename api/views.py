@@ -181,7 +181,7 @@ class CourseAttendanceAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class AttendanceAPIView(APIView):
+class MarkAttendanceAPIView(APIView):
     def post(self, request, lecture_id, format=None):
         student_ids = request.data.get('student_ids', [])
 
@@ -210,3 +210,17 @@ class AttendanceAPIView(APIView):
             return Response({"error": f"Students with IDs {', '.join(map(str, students_not_found))} do not exist"}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({"message": "Attendance marked successfully"}, status=status.HTTP_201_CREATED)
+
+class LectureCreateAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = CreateLectureSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class GetLectureListAPIView(APIView):
+    def get(self, request, course_id, branch_id, batch_id, *args, **kwargs):
+        lectures = Lecture.objects.filter(course_id=course_id, branch_id=branch_id, batch_id=batch_id)
+        serializer = LectureSerializer(lectures, many=True)
+        return Response(serializer.data)
