@@ -47,11 +47,11 @@ from .models import Lecture
 class CreateLectureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecture
-        fields = ['course', 'batch', 'branch']
+        fields = ['date','course', 'batch', 'branch']
 
     def validate(self, data):
         # Custom validation if needed
         # For example, you might want to check if the lecture for the given date, course, batch, and branch already exists
-        if Lecture.objects.filter( course=data['course'], batch=data['batch'], branch=data['branch']).exists():
+        if Lecture.objects.filter(date=data['date'], course=data['course'], batch=data['batch'], branch=data['branch']).exists():
             raise serializers.ValidationError("Lecture already exists for this date, course, batch, and branch.")
         return data
