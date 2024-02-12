@@ -16,10 +16,10 @@ SECRET_KEY = 'django-insecure-)e&%b1=b5i3!_^%pl_t85*@$_k8fv_9dc3-mm*6!rig!)uf7()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['attendance-app-22ye.onrender.com','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['attendance-app-22ye.onrender.com','attendance-app-besv.onrender.com','127.0.0.1','localhost']
 AUTH_USER_MODEL = 'account.User'
 # Application definition
-
+# attendance-app-besv.onrender.com
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -84,7 +84,7 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': dj_database_url.parse(
-        'postgres://attendance_app_lx0e_user:nCvVwu4gNKUXOLfP5oPZroIPBU6UFHmj@dpg-cmv63muv3ddc73bqpuig-a.oregon-postgres.render.com/attendance_app_lx0e',
+        'postgres://attendance_app_data_j4th_user:UnycH6E4P1T1tbVpXOQ9KfyVsmZRmZlF@dpg-cn55fmgl5elc739ciut0-a.oregon-postgres.render.com/attendance_app_data_j4th',
     )
 }
 # Password validation

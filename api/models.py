@@ -37,7 +37,7 @@ class Course(models.Model):
 
 
 class Lecture(models.Model):
-    date = models.DateField()
+    date = models.CharField(max_length=50)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
