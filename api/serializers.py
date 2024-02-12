@@ -47,7 +47,7 @@ from .models import Lecture
 class CreateLectureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecture
-        fields = ['date', 'course', 'batch', 'branch']
+        fields = ['course', 'batch', 'branch']
 
     def validate(self, data):
         # Custom validation if needed
