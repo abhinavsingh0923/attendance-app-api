@@ -34,7 +34,9 @@ class Course(models.Model):
     code = models.CharField(unique=True,max_length=10)
     year = models.IntegerField(validators =[MaxValueValidator(5)])
     batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
-
+    def __str__(self):
+        return self.name
+    
 
 class Lecture(models.Model):
     date = models.CharField(max_length=50)
@@ -61,7 +63,7 @@ class Attendance(models.Model):
 
 class TeacherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='teacher_profile')
-    courses = models.ManyToManyField('Course', related_name='teachers')
+    courses = models.ManyToManyField('Course', related_name='Course')
 
     def __str__(self):
-        return self.user.username + "'s Profile"
+        return self.user + "'s Profile"
