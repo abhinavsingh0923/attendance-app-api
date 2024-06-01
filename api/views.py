@@ -45,37 +45,37 @@ class faces(APIView):
             item['face_vector'] = clean_face_vector(item['face_vector'])
         return Response(data=inputdata)
 
-# class match_face(APIView):
-    # def post(self, request, batch_id, branch_id):
-    #     user_image = request.FILES['image']
+class match_face(APIView):
+    def post(self, request, batch_id, branch_id):
+        user_image = request.FILES['image']
 
-    #     known_faces = StudentFaceModel.objects.filter(batch_id=batch_id, branch_id=branch_id)
-    #     if not known_faces:
-    #         return Response({'error': 'No known faces found for the provided batch and branch'}, status=status.HTTP_404_NOT_FOUND)
+        known_faces = StudentFaceModel.objects.filter(batch_id=batch_id, branch_id=branch_id)
+        if not known_faces:
+            return Response({'error': 'No known faces found for the provided batch and branch'}, status=status.HTTP_404_NOT_FOUND)
 
-    #     serialzier = FaceModelSerializer(known_faces, many=True)
-    #     known_faces_data = serialzier.data
+        serialzier = FaceModelSerializer(known_faces, many=True)
+        known_faces_data = serialzier.data
 
-    #     for item in known_faces_data:
-    #         item['face_vector'] = clean_face_vector(item['face_vector'])
+        for item in known_faces_data:
+            item['face_vector'] = clean_face_vector(item['face_vector'])
 
-    #     user_image_data = Image.open(user_image)
-    #     user_face_locations = face_recognition.face_locations(np.array(user_image_data))
-    #     user_face_encodings = face_recognition.face_encodings(np.array(user_image_data), user_face_locations)
+        user_image_data = Image.open(user_image)
+        user_face_locations = face_recognition.face_locations(np.array(user_image_data))
+        user_face_encodings = face_recognition.face_encodings(np.array(user_image_data), user_face_locations)
 
-    #     if not user_face_encodings:
-    #         return Response({'error': 'No faces found in the provided image'}, status=status.HTTP_400_BAD_REQUEST)
+        if not user_face_encodings:
+            return Response({'error': 'No faces found in the provided image'}, status=status.HTTP_400_BAD_REQUEST)
 
-    #     user_face_vector = user_face_encodings[0]
+        user_face_vector = user_face_encodings[0]
 
-    #     for known_face in known_faces_data:
-    #         known_face_vector = known_face['face_vector']
-    #         match_result = face_recognition.compare_faces([known_face_vector], user_face_vector, tolerance=0.6)[0]
+        for known_face in known_faces_data:
+            known_face_vector = known_face['face_vector']
+            match_result = face_recognition.compare_faces([known_face_vector], user_face_vector, tolerance=0.6)[0]
 
-    #         if match_result:
-    #             return Response({'match': True, 'name': known_face['name']}, status=status.HTTP_200_OK)
+            if match_result:
+                return Response({'match': True, 'name': known_face['name']}, status=status.HTTP_200_OK)
 
-    #     return Response({'match': False, 'error': 'No match found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'match': False, 'error': 'No match found'}, status=status.HTTP_404_NOT_FOUND)
 
 class StudentList(APIView):
     def get(self, request, branch_id, batch_id):
